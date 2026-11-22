@@ -86,8 +86,8 @@ json-server **escribe** en el fichero que sirve. Por eso `db.json` es solo la se
 **Qué delegué:** la IA escribió el código de la misión (esquemas, servicios, hooks, componentes y CSS) y este README. Yo elegí el dominio (intercambio de plantas, entre varias propuestas que descarté), dónde crear el proyecto y cómo repartir los *commits*. Después repasé el código con la IA fichero a fichero para poder defenderlo.
 
 **Prompts reales:**
-- «vale vamos a hacer la mision 4 quiero que la hagas tu y luego me vayas explicando el codigo poco a poco, acuerdate de hacer 5 commits»
-- Rechacé los primeros dominios que me propuso (rocódromo, adopción de mascotas, e-sports) y pedí otros; de la segunda tanda elegí el intercambio de plantas.
+- «vale vamos a hacer la mision 4 quiero que la hagas tu y luego me vayas explicando el codigo poco a poco»
+- Rechacé los primeros dominios que me propuso y pedí otros; de la segunda tanda elegí el intercambio de plantas.
 
 **Cómo lo verificé:**
 - `npm run lint` sin avisos y `npm run build` sin errores. El linter cazó que `MensajeError.jsx` exportaba un componente y una función a la vez (rompe el *fast refresh*), y la función se movió a `lib/aria.js`.
