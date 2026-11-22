@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "api": "node scripts/preparar-db.js && json-server --port 3000 db.runtime.json",
+    "api:reset": "node scripts/preparar-db.js --reset",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
