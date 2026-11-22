@@ -1,4 +1,288 @@
+/* Paleta en variables: se cambia aquí y cambia toda la app. */
+:root {
+  --verde: #2f6b3a;
+  --verde-claro: #e6f2e2;
+  --tierra: #8a5a2b;
+  --fondo: #f7f5ef;
+  --texto: #1f2a1f;
+  --gris: #5d665d;
+  --borde: #cfd6c8;
+  --error: #b3261e;
+  --error-fondo: #fdecea;
+  --alerta-fondo: #fff4d6;
+  --radio: 10px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.45;
+  color: var(--texto);
+  background: var(--fondo);
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.cabecera h1 {
+  margin: 0;
+  color: var(--verde);
+}
+.cabecera p {
+  margin: 0.25rem 0 1.5rem;
+  color: var(--gris);
+}
+
+/* Dos columnas en pantallas anchas; una en el móvil. */
+.contenido {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .contenido {
+    grid-template-columns: minmax(360px, 1fr) 1.3fr;
+  }
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+}
+.panel h2 {
+  margin-top: 0;
+}
+
+/* ── Formulario ─────────────────────────────── */
+.formulario {
+  display: grid;
+  gap: 0.9rem;
+}
+.fila {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+.campo {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+}
+fieldset.campo {
+  border: none;
+  padding: 0;
+}
+.campo > label,
+legend {
+  font-weight: 600;
+  padding: 0;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  font: inherit;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: #fff;
+}
+textarea {
+  resize: vertical;
+}
+/* El borde rojo sale del MISMO atributo que lee el lector de pantalla. */
+[aria-invalid="true"] {
+  border-color: var(--error);
+  outline-color: var(--error);
+}
+:focus-visible {
+  outline: 3px solid var(--verde);
+  outline-offset: 2px;
+}
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+}
+.opcion {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: normal;
+  cursor: pointer;
+}
+.opcion input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--verde);
+}
+.error {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.9rem;
+}
+.ayuda {
+  margin: 0;
+  color: var(--gris);
+  font-size: 0.85rem;
+}
+.contador-excedido {
+  color: var(--error);
+  font-weight: 600;
+}
+
+/* ── Botones ────────────────────────────────── */
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--verde);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  background: var(--verde);
+  color: #fff;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.boton-secundario {
+  background: #fff;
+  color: var(--verde);
+}
+.enlace {
+  border: none;
+  background: none;
+  color: var(--error);
+  text-decoration: underline;
+  padding: 0;
+}
+.acciones {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* ── Avisos (carga, error, éxito, bonus) ────── */
+.aviso {
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: 6px;
+}
+.aviso p {
+  margin: 0 0 0.4rem;
+}
+.aviso-error {
+  background: var(--error-fondo);
+  color: var(--error);
+}
+.aviso-exito {
+  background: var(--verde-claro);
+  color: var(--verde);
+}
+.aviso-alerta {
+  background: var(--alerta-fondo);
+  margin-bottom: 1rem;
+}
+.aviso-alerta ul {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+/* ── Tablón ─────────────────────────────────── */
+.tablon-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.filtro select {
+  width: auto;
+}
+.contador,
+.vacio {
+  color: var(--gris);
+}
+.lista {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.tarjeta {
+  border: 1px solid var(--borde);
+  border-left: 5px solid var(--verde);
+  border-radius: var(--radio);
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.tarjeta p {
+  margin: 0;
+}
+.tarjeta-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
+}
+.tarjeta-cabecera h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.tarjeta-datos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+}
+.tarjeta-pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+.tarjeta-pie span {
+  flex: 1 1 100%;
+}
+.tarjeta-pie a {
+  color: var(--verde);
+  font-weight: 600;
+}
+.tarjeta-pie button {
+  padding: 0.25rem 0.7rem;
+  margin-left: auto;
+}
+.etiqueta {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.etiqueta-intercambio {
+  background: #f3e6d6;
+  color: var(--tierra);
+}
+.etiqueta-regalo {
+  background: var(--verde-claro);
+  color: var(--verde);
 }

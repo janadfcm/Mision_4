@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCiudades } from "../hooks/useCiudades.js";
 import { useEsquejes, useRetirarEsqueje } from "../hooks/useEsquejes.js";
+import AvisoDescartados from "./AvisoDescartados.jsx";
 import TarjetaEsqueje from "./TarjetaEsqueje.jsx";
 
 export default function Tablon() {
@@ -53,14 +54,18 @@ export default function Tablon() {
         <>
           {/* isFetching sin isPending: hay datos y se están actualizando. */}
           <p className="contador" aria-live="polite">
-            {esquejes.isFetching ? "Actualizando…" : `${esquejes.data.length} anuncios`}
+            {esquejes.isFetching
+              ? "Actualizando…"
+              : `${esquejes.data.esquejes.length} ${esquejes.data.esquejes.length === 1 ? "anuncio" : "anuncios"}`}
           </p>
 
-          {esquejes.data.length === 0 ? (
+          <AvisoDescartados descartados={esquejes.data.descartados} />
+
+          {esquejes.data.esquejes.length === 0 ? (
             <p className="vacio">Aún no hay plantas en esta ciudad. ¡Publica la primera!</p>
           ) : (
             <div className="lista">
-              {esquejes.data.map((esqueje) => (
+              {esquejes.data.esquejes.map((esqueje) => (
                 <TarjetaEsqueje
                   key={esqueje.id}
                   esqueje={esqueje}
